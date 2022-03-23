@@ -46,19 +46,19 @@ const plugins = () => {
         basePlugins.push(
             new ImageMinimizerPlugin({
                 minimizer: {
-                  implementation: ImageMinimizerPlugin.imageminMinify,
-                  options: {
-                    // Lossless optimization with custom option
-                    // Feel free to experiment with options for better result for you
-                    plugins: [
-                      ["gifsicle", { interlaced: true }],
-                      ["jpegtran", { progressive: true }],
-                      ["optipng", { optimizationLevel: 5 }],
-                      // Svgo configuration here https://github.com/svg/svgo#configuration
-                    ],
-                  },
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: {
+                        // Lossless optimization with custom option
+                        // Feel free to experiment with options for better result for you
+                        plugins: [
+                            ["gifsicle", { interlaced: true }],
+                            ["jpegtran", { progressive: true }],
+                            ["optipng", { optimizationLevel: 5 }],
+                            // Svgo configuration here https://github.com/svg/svgo#configuration
+                        ],
+                    },
                 },
-              }),
+            })
         );
     }
 
@@ -142,17 +142,16 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 type: "asset/resource",
+                generator: {
+                    filename: "./img/[name][ext]",
+                },
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                use: [
-                    {
-                        loader: "file-loader",
-                        options: {
-                            name: `./fonts/${filename("[ext]")}`,
-                        },
-                    },
-                ],
+                type: "asset/resource",
+                generator: {
+                    filename: "./fonts/[name][ext]",
+                }
             },
         ],
     },
