@@ -72,7 +72,6 @@ module.exports = {
     output: {
         filename: `./js/${filename("js")}`,
         path: path.resolve(__dirname, "app"),
-        assetModuleFilename: "img/[name][ext][query]",
         clean: true,
     },
     devServer: {
@@ -151,7 +150,7 @@ module.exports = {
                 type: "asset/resource",
                 generator: {
                     filename: "./fonts/[name][ext]",
-                }
+                },
             },
         ],
     },
