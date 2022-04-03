@@ -36,6 +36,7 @@
 <ul>
   <li>@babel/core</li>
   <li>@babel/plugin-proposal-class-properties</li>
+  <li>@babel/plugin-syntax-top-level-await</li>
   <li>@babel/preset-env</li>
 </ul>
 
