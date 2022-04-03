@@ -68,7 +68,7 @@ const plugins = () => {
 module.exports = {
     context: path.resolve(__dirname, "src"),
     mode: "development",
-    entry: "./js/main.js",
+    entry: ["babel-polyfill", "./js/main.js"],
     output: {
         filename: `./js/${filename("js")}`,
         path: path.resolve(__dirname, "app"),
@@ -79,7 +79,7 @@ module.exports = {
         open: true,
         compress: true,
         hot: true,
-        port: 3000,
+        port: 4200,
         static: {
             directory: path.resolve(__dirname, "app"),
         },
@@ -134,12 +134,17 @@ module.exports = {
                 ],
             },
             {
-                test: /\.js$/,
+                test: /\.(js|mjs|jsx|ts|tsx)$/,
                 exclude: /node_modules/,
-                use: ["babel-loader"],
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        plugins: ["@babel/plugin-syntax-top-level-await"],
+                    },
+                },
             },
             {
-                test: /\.(png|jpe?g|gif)$/i,
+                test: /\.(png|jpe?g|gif|svg|webp)$/i,
                 type: "asset/resource",
                 generator: {
                     filename: "./img/[name][ext]",
